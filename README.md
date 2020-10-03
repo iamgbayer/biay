@@ -1,27 +1,33 @@
 # biay
 
-> Made with create-react-library
+> ⚡ Simple UI Components for your React applications
 
 [![NPM](https://img.shields.io/npm/v/biay.svg)](https://www.npmjs.com/package/biay) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Install
+## Getting started
+
+### Install biay and dependencies
 
 ```bash
-npm install --save biay
+yarn add styled-components styled-system biay
 ```
 
-## Usage
+### Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
 
-import MyComponent from 'biay'
-import 'biay/dist/index.css'
+import { Reset, Theme } from 'biay'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+export default function App() {
+  return (
+    <ThemeProvider theme={Theme.dark}>
+      <Reset />
+
+      <Text>Usage</Text>
+    </ThemeProvider>
+  )
 }
 ```
 

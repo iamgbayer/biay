@@ -1,0 +1,6 @@
+.eslitrc
+.editorconfig
+.prettierrc
+.travis.yml
+.storybook
+src
