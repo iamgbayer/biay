@@ -8,9 +8,10 @@ import * as Icons from './Icons'
 
 type Props = {
   name: string
-  color: string
-  width: number
-  height: number
+  color?: string
+  width?: number
+  height?: number
+  onClick?: () => void
 }
 
 const capitalize = (string: string) =>

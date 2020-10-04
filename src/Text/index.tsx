@@ -40,10 +40,10 @@ export const Text = styled.span`
     'color',
     switchProp('theme.is', {
       light: css`
-        color: ${theme('color.accent.100')};
+        color: ${theme('colors.accent.100')};
       `,
       dark: css`
-        color: ${theme('color.accent.100')};
+        color: ${theme('colors.accent.100')};
       `
     })
   )};

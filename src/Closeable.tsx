@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react'
 type Props = {
   children: React.ReactNode
   whenClose: () => void
-  key: string | number
+  key?: string | number
 }
 
 export const Closeable = ({ children, whenClose, key }: Props) => {
