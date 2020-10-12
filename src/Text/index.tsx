@@ -11,7 +11,14 @@ import {
   layout
 } from 'styled-system'
 
-export const Text = styled.span`
+type Props = {
+  marginLeft: number
+  marginRight: number
+  marginBottom: number
+  marginTop: number
+}
+
+export const Text = styled.span<Partial<Props>>`
   display: inline-block;
   ${fontSize}
   ${fontWeight}
