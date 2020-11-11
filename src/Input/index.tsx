@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { ifProp, switchProp, theme } from 'styled-tools'
 import { space } from 'styled-system'
+import { ifProp, switchProp, theme } from 'styled-tools'
 
 type IconAlign = 'left' | 'right'
 
@@ -10,24 +10,24 @@ type Props = {
   type: 'text'
   onChange: () => void
   placeholder: string
-  icon: ({
+  icon?: ({
     width,
     height
   }: {
     width: number
     height: number
   }) => React.ReactNode
-  iconAlign: IconAlign
+  iconAlign?: IconAlign
   error: { has: boolean; message: string }
   isRequired: boolean
   isDisabled: boolean
-  id: string
+  id?: string
   label: string
   hasBackground: boolean
-  marginTop: number
-  marginBottom: number
-  marginRight: number
-  marginLeft: number
+  marginTop?: number
+  marginBottom?: number
+  marginRight?: number
+  marginLeft?: number
   isFull: boolean
   name: string
 }
@@ -39,10 +39,10 @@ const iconAlign = {
 
 const Container = styled.div<{
   isFull: boolean
-  marginTop: number
-  marginBottom: number
-  marginLeft: number
-  marginRight: number
+  marginTop?: number
+  marginBottom?: number
+  marginLeft?: number
+  marginRight?: number
 }>`
   ${space};
   width: ${ifProp({ isFull: true }, '100%', 'max-content')};
@@ -53,8 +53,8 @@ const Container = styled.div<{
 
 const Inputable = styled.input<{
   hasError: boolean
-  icon: unknown
-  iconAlign: IconAlign
+  icon?: unknown
+  iconAlign?: IconAlign
   isRequired: boolean
   isDisabled: boolean
   hasBackground: boolean
@@ -71,19 +71,13 @@ const Inputable = styled.input<{
   background-color: ${ifProp(
     { hasBackground: true },
     theme('colors.accent.700'),
-    'transparent'
+    theme('colors.accent.800')
   )};
   color: ${ifProp(
     'hasError',
     theme('colors.support.100'),
     theme('colors.accent.200')
   )};
-  ${ifProp(
-    { isDisabled: true },
-    css`
-      background-color: ${theme('colors.quartiary')};
-    `
-  )}
   padding: 0 10px;
   border: 1px solid
     ${ifProp(
@@ -103,6 +97,7 @@ const Inputable = styled.input<{
     }),
     null
   )}
+
   &::placeholder {
     color: ${ifProp(
       'hasError',
@@ -118,17 +113,18 @@ const Message = styled.span`
   color: ${theme('colors.support.100')};
 `
 
-const Label = styled.label<{ hasError: boolean }>`
+const Label = styled.label<{ isDisabled: boolean; hasError: boolean }>`
   font-family: ${theme('fonts.100')};
   color: ${ifProp(
     'hasError',
     theme('colors.support.100'),
     theme('colors.accent.200')
   )};
+  cursor: ${ifProp({ isDisabled: true }, 'not-allowed', 'normal')};
   margin-bottom: 5px;
 `
 
-const Content = styled.div<{ iconAlign: IconAlign }>`
+const Content = styled.div<{ iconAlign?: IconAlign }>`
   display: flex;
   align-items: center;
   width: 28px;
@@ -179,7 +175,7 @@ export const Input = ({
       marginRight={marginRight}
     >
       {label && (
-        <Label htmlFor={id} hasError={error.has}>
+        <Label htmlFor={id} hasError={error.has} isDisabled={isDisabled}>
           {label}
         </Label>
       )}
@@ -204,6 +200,7 @@ export const Input = ({
         onChange={onChange}
         placeholder={placeholder}
         isRequired={isRequired}
+        disabled={isDisabled}
         isDisabled={isDisabled}
         hasBackground={hasBackground}
       />

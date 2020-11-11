@@ -1,8 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
 import Selectable from 'react-select'
+import styled from 'styled-components'
 import { ifProp, theme } from 'styled-tools'
-
 import { Box } from '../Box'
 
 type Value = {
@@ -34,12 +33,13 @@ const Container = styled(Box)<{ isFull: boolean; hasBackground: boolean }>`
   }
 
   .select__control {
+    height: 38px;
     border-color: ${theme('colors.accent.500')};
     box-shadow: none;
     background-color: ${ifProp(
       { hasBackground: true },
       theme('colors.accent.700'),
-      'transparent'
+      theme('colors.accent.800')
     )};
   }
 

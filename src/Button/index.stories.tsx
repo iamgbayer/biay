@@ -16,6 +16,7 @@ storiesOf(`${GROUPS.COMPONENTS}|Button`, module)
   .add('Appearance', () => (
     <Buttons>
       <Button appearance='primary'>Primary</Button>
+      <Button appearance='secondary'>Secondary</Button>
       <Button appearance='stroke'>Stroke</Button>
     </Buttons>
   ))

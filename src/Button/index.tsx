@@ -9,7 +9,7 @@ type Props = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   children: React.ReactNode
   size: 'medium' | 'small'
-  appearance: 'primary' | 'stroke'
+  appearance: 'primary' | 'stroke' | 'secondary'
   isFull: boolean
   isDisabled: boolean
 }
@@ -31,6 +31,7 @@ export const Container = styled.button<
       theme('colors.accent.700'),
       theme('colors.accent.300')
     ),
+    secondary: theme('colors.accent.200'),
     stroke: theme('colors.primary.100')
   })};
 
@@ -44,7 +45,8 @@ export const Container = styled.button<
 
   background-color: ${switchProp('appearance', {
     primary: theme('colors.primary.100'),
-    stroke: 'transparent'
+    stroke: 'transparent',
+    secondary: theme('colors.accent.700')
   })};
 
   ${ifProp(
@@ -62,15 +64,15 @@ export const Container = styled.button<
 
   padding: ${switchProp('size', {
     small: '0 15px',
-    medium: '0 35px'
+    medium: '0 20px'
   })};
 
   border: 1px solid
-    ${ifProp(
-      { appearance: 'stroke' },
-      theme('colors.primary.100'),
-      'transparent'
-    )};
+    ${switchProp('appearance', {
+      stroke: theme('colors.primary.100'),
+      primary: 'transparent',
+      secondary: theme('colors.accent.500')
+    })};
 
   display: flex;
   justify-content: center;

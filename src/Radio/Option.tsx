@@ -62,7 +62,7 @@ const Styled = styled.div<{
     ${ifProp(
       { isChecked: true },
       theme('colors.primary.100'),
-      theme('colors.accent.100')
+      theme('colors.accent.200')
     )};
 
   ${switchProp('size', {
@@ -109,7 +109,7 @@ export const Option = React.forwardRef<HTMLInputElement, Props>(
           </Styled>
         </Content>
 
-        <Text marginLeft={10} color='accent.100'>
+        <Text marginLeft={10} color='accent.200'>
           {label}
         </Text>
       </Container>
