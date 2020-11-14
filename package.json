@@ -1,6 +1,6 @@
 {
   "name": "biay",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Made with create-react-library",
   "author": "iamgbayer",
   "license": "MIT",
@@ -70,11 +70,11 @@
     "dist"
   ],
   "dependencies": {
-    "@types/react-table": "^7.0.25",
+    "@types/react-table": "^6.11.5",
     "lodash.get": "^4.4.2",
     "ramda": "^0.27.1",
     "react-select": "^3.1.0",
-    "react-table": "^7.6.2",
+    "react-table": "^6.11.5",
     "styled-tools": "^1.7.2"
   }
 }
