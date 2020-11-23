@@ -1,21 +1,24 @@
 import styled, { css } from 'styled-components'
-import { theme, ifNotProp, ifProp, switchProp } from 'styled-tools'
 import {
+  color,
+  fontFamily,
   fontSize,
   fontWeight,
-  color,
+  layout,
   lineHeight,
-  textAlign,
   space,
-  fontFamily,
-  layout
+  textAlign
 } from 'styled-system'
+import { ifNotProp, ifProp, switchProp, theme } from 'styled-tools'
 
 type Props = {
   marginLeft: number
   marginRight: number
   marginBottom: number
   marginTop: number
+  fontFamily: string | number
+  fontSize: string | number
+  fontWeight: string | number
 }
 
 export const Text = styled.span<Partial<Props>>`

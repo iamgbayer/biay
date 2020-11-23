@@ -1,9 +1,8 @@
+import get from 'lodash/get'
 import React, { memo, useContext } from 'react'
 import styled, { css, ThemeContext } from 'styled-components'
-import { ifProp } from 'styled-tools'
 import { space } from 'styled-system'
-import get from 'lodash/get'
-
+import { ifProp } from 'styled-tools'
 import * as Icons from './Icons'
 
 type Props = {
@@ -12,6 +11,10 @@ type Props = {
   width?: number
   height?: number
   onClick?: () => void
+  marginLeft?: number | string
+  marginRight?: number | string
+  marginTop?: number | string
+  marginBottom?: number | string
 }
 
 const capitalize = (string: string) =>

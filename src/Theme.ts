@@ -1,5 +1,5 @@
+import merge from 'ramda/src/merge'
 import { Tokens } from './Tokens'
-import { merge } from 'ramda'
 
 const withTokens = (theme: object) => merge(Tokens, theme)
 

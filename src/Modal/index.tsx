@@ -1,11 +1,10 @@
+import { rgba } from 'polished'
+import or from 'ramda/src/or'
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { theme } from 'styled-tools'
-import { rgba } from 'polished'
-import { or } from 'ramda'
-
-import { Icon } from '../Icon'
 import { Closeable } from '../Closeable'
+import { Icon } from '../Icon'
 
 type Props = {
   children: React.ReactNode
