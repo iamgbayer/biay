@@ -3,6 +3,7 @@ import React, { memo, useContext } from 'react'
 import styled, { css, ThemeContext } from 'styled-components'
 import { space } from 'styled-system'
 import { ifProp } from 'styled-tools'
+import { getByTheme } from '../helpers'
 import * as Icons from './Icons'
 
 type Props = {
@@ -46,7 +47,10 @@ const Container = styled.div`
 export const Icon = memo(
   ({
     name,
-    color = 'accent.200',
+    color = getByTheme({
+      dark: 'accent.400',
+      light: 'accent.350'
+    }),
     width = 20,
     height = 20,
     ...props
