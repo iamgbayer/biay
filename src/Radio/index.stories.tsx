@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
-
-import { GROUPS, Container } from '../../.storybook'
+import React, { useState } from 'react'
+import { Container } from '../../.storybook'
 import { Radio } from './index'
 
 const Radios = () => {
@@ -22,6 +21,6 @@ const Radios = () => {
   )
 }
 
-storiesOf(`${GROUPS.COMPONENTS}|Radio`, module)
+storiesOf(`Radio`, module)
   .addDecorator((story) => <Container>{story()}</Container>)
   .add('Default', () => <Radios />)

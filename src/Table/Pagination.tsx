@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { theme } from 'styled-tools'
+import { switchProp, theme } from 'styled-tools'
+import { getByTheme } from '../helpers'
 import { Icon } from '../Icon'
 
 const Content = styled.div`
@@ -12,11 +12,21 @@ const Content = styled.div`
 
   .button {
     font-family: ${theme('fonts.100')};
-    font-size: ${theme('fontSizes.15')};
+    font-size: ${theme('fontSizes.12')};
     border-radius: ${theme('radii.5')};
-    border: 1px solid ${theme('colors.accent.500')};
-    background-color: ${theme('colors.accent.700')};
-    color: ${theme('colors.accent.200')};
+    border: 1px solid
+      ${switchProp('theme.is', {
+        dark: theme('colors.accent.500'),
+        light: theme('colors.accent.250')
+      })};
+    background-color: ${switchProp('theme.is', {
+      dark: theme('colors.accent.600'),
+      light: theme('colors.accent.150')
+    })};
+    color: ${switchProp('theme.is', {
+      dark: theme('colors.accent.350'),
+      light: theme('colors.accent.400')
+    })};
     transition: all 0.2s ease-in;
     display: flex;
     align-items: center;
@@ -29,8 +39,15 @@ const Content = styled.div`
   }
 
   .active {
-    border: 1px solid ${theme('colors.accent.500')};
-    background-color: ${theme('colors.accent.600')};
+    border: 1px solid
+      ${switchProp('theme.is', {
+        dark: theme('colors.accent.500'),
+        light: theme('colors.accent.250')
+      })};
+    background-color: ${switchProp('theme.is', {
+      dark: theme('colors.accent.700'),
+      light: theme('colors.accent.100')
+    })};
   }
 `
 
@@ -94,8 +111,11 @@ export default function Pagination({
 
   const isDisabled = (pageNumber: number) => page + 1 === pageNumber
 
-  const getIconColor = (isDisabled: boolean) =>
-    isDisabled ? 'accent.200' : 'accent.200'
+  const getIconColor = () =>
+    getByTheme({
+      dark: 'accent.350',
+      light: 'accent.400'
+    })
 
   useEffect(() => {
     setVisiblePages(getVisiblePages(0, pages))
@@ -112,18 +132,13 @@ export default function Pagination({
         onClick={() => changePage(1)}
         disabled={isDisabled(1)}
       >
+        <Icon name='left' color={getIconColor()} width={10} height={10} />
         <Icon
           name='left'
-          color={getIconColor(isDisabled(1))}
-          width={12}
-          height={12}
-        />
-        <Icon
-          name='left'
-          color={getIconColor(isDisabled(1))}
+          color={getIconColor()}
           marginLeft='-6px'
-          width={12}
-          height={12}
+          width={10}
+          height={10}
         />
       </PageButtonComponent>
 
@@ -132,12 +147,7 @@ export default function Pagination({
         onClick={() => changePage(page)}
         disabled={isDisabled(1)}
       >
-        <Icon
-          name='left'
-          color={getIconColor(isDisabled(1))}
-          width={12}
-          height={12}
-        />
+        <Icon name='left' color={getIconColor()} width={10} height={10} />
       </PageButtonComponent>
 
       {visiblePages.map((page: number) => (
@@ -155,12 +165,7 @@ export default function Pagination({
         onClick={() => changePage(page + 2)}
         disabled={isDisabled(page)}
       >
-        <Icon
-          name='right'
-          color={getIconColor(isDisabled(pages))}
-          width={12}
-          height={12}
-        />
+        <Icon name='right' color={getIconColor()} width={10} height={10} />
       </PageButtonComponent>
 
       <PageButtonComponent
@@ -168,26 +173,15 @@ export default function Pagination({
         onClick={() => changePage(pages)}
         disabled={isDisabled(pages)}
       >
+        <Icon name='right' color={getIconColor()} width={10} height={10} />
         <Icon
           name='right'
-          color={getIconColor(isDisabled(pages))}
-          width={12}
-          height={12}
-        />
-        <Icon
-          name='right'
-          color={getIconColor(isDisabled(pages))}
-          width={12}
-          height={12}
+          color={getIconColor()}
+          width={10}
+          height={10}
           marginLeft='-6px'
         />
       </PageButtonComponent>
     </Content>
   )
-}
-
-Pagination.propTypes = {
-  pages: PropTypes.number,
-  page: PropTypes.number,
-  onPageChange: PropTypes.func
 }

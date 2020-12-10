@@ -61,8 +61,8 @@ const Inputable = styled.input<{
   placeholder: string
 }>`
   -webkit-appearance: none;
-  border-radius: ${theme('radii.5')};
   -moz-appearance: none;
+  border-radius: ${theme('radii.5')};
   appearance: none;
   font-family: ${theme('fonts.100')};
   cursor: ${ifProp('isDisabled', 'not-allowed', 'initial')};
@@ -70,20 +70,29 @@ const Inputable = styled.input<{
   outline: none;
   background-color: ${ifProp(
     { hasBackground: true },
-    theme('colors.accent.700'),
-    theme('colors.accent.800')
+    switchProp('theme.is', {
+      dark: theme('colors.accent.600'),
+      light: theme('colors.accent.150')
+    }),
+    'transparent'
   )};
   color: ${ifProp(
     'hasError',
     theme('colors.support.100'),
-    theme('colors.accent.200')
+    switchProp('theme.is', {
+      dark: theme('colors.accent.350'),
+      light: theme('colors.accent.400')
+    })
   )};
   padding: 0 10px;
   border: 1px solid
     ${ifProp(
       'hasError',
       theme('colors.support.100'),
-      theme('colors.accent.500')
+      switchProp('theme.is', {
+        dark: theme('colors.accent.500'),
+        light: theme('colors.accent.250')
+      })
     )};
   ${ifProp(
     'icon',
@@ -102,7 +111,10 @@ const Inputable = styled.input<{
     color: ${ifProp(
       'hasError',
       theme('colors.support.100'),
-      theme('colors.accent.200')
+      switchProp('theme.is', {
+        dark: theme('colors.accent.350'),
+        light: theme('colors.accent.400')
+      })
     )};
   }
 `
@@ -118,7 +130,10 @@ const Label = styled.label<{ isDisabled: boolean; hasError: boolean }>`
   color: ${ifProp(
     'hasError',
     theme('colors.support.100'),
-    theme('colors.accent.200')
+    switchProp('theme.is', {
+      dark: theme('colors.accent.350'),
+      light: theme('colors.accent.400')
+    })
   )};
   cursor: ${ifProp({ isDisabled: true }, 'not-allowed', 'normal')};
   margin-bottom: 5px;

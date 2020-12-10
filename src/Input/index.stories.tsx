@@ -1,20 +1,31 @@
 import { storiesOf } from '@storybook/react'
-import React from 'react'
-import { Container, GROUPS } from '../../.storybook'
+import React, { useState } from 'react'
+import { Container } from '../../.storybook'
 import { Input } from '../index'
 
-storiesOf(`${GROUPS.COMPONENTS}|Input`, module)
-  .addDecorator((story) => <Container>{story()}</Container>)
-  .add('Appearance', () => <Input name='fruit' label='Fruit' />)
-  .add('Disabled', () => (
-    <>
-      <Input name='fruit' label='Fruit' isDisabled />
-      <Input name='fruit' label='Fruit' />
-    </>
-  ))
+type Props = {
+  isDisabled?: boolean
+  isFull?: boolean
+}
 
-  .add('Full', () => (
-    <>
-      <Input name='fruit' label='Fruit' isFull />
-    </>
-  ))
+const Inputable = ({ isDisabled, isFull }: Props) => {
+  const [value, setValue] = useState('')
+
+  return (
+    <Input
+      name='fruit'
+      label='Fruit'
+      value={value}
+      onChange={({ target}) => setValue(target.value)}
+      isDisabled={isDisabled}
+      isFull={isFull}
+    />
+  )
+}
+
+storiesOf(`Input`, module)
+  .addDecorator((story) => <Container>{story()}</Container>)
+  .add('Appearance', () => <Inputable />)
+  .add('Disabled', () => <Inputable isDisabled />)
+
+  .add('Full', () => <Inputable isFull />)

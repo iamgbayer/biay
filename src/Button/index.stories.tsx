@@ -1,8 +1,7 @@
-import React from 'react'
 import { storiesOf } from '@storybook/react'
+import React from 'react'
 import styled from 'styled-components'
-
-import { GROUPS, Container } from '../../.storybook'
+import { Container } from '../../.storybook'
 import { Button } from '../index'
 
 const Buttons = styled.div`
@@ -11,7 +10,7 @@ const Buttons = styled.div`
   justify-content: space-evenly;
 `
 
-storiesOf(`${GROUPS.COMPONENTS}|Button`, module)
+storiesOf(`Button`, module)
   .addDecorator((story) => <Container>{story()}</Container>)
   .add('Appearance', () => (
     <Buttons>
@@ -19,6 +18,11 @@ storiesOf(`${GROUPS.COMPONENTS}|Button`, module)
       <Button appearance='secondary'>Secondary</Button>
       <Button appearance='stroke'>Stroke</Button>
     </Buttons>
+  ))
+  .add('Loading', () => (
+    <>
+      <Button isLoading>Loading</Button>
+    </>
   ))
   .add('Disabled', () => (
     <>

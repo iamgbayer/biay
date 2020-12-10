@@ -1,11 +1,10 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { ifProp, switchProp, theme } from 'styled-tools'
 import { space, SpaceProps } from 'styled-system'
-
-import { useRadioContext } from './Context'
-
+import { ifProp, switchProp, theme } from 'styled-tools'
+import { getByTheme } from '../helpers'
 import { Text } from '../Text'
+import { useRadioContext } from './Context'
 
 type Size = 'medium' | 'large'
 
@@ -62,7 +61,10 @@ const Styled = styled.div<{
     ${ifProp(
       { isChecked: true },
       theme('colors.primary.100'),
-      theme('colors.accent.200')
+      switchProp('theme.is', {
+        dark: theme('colors.accent.200'),
+        light: theme('colors.accent.400')
+      })
     )};
 
   ${switchProp('size', {
@@ -109,7 +111,13 @@ export const Option = React.forwardRef<HTMLInputElement, Props>(
           </Styled>
         </Content>
 
-        <Text marginLeft={10} color='accent.200'>
+        <Text
+          marginLeft={10}
+          color={getByTheme({
+            dark: 'accent.200',
+            light: 'accent.400'
+          })}
+        >
           {label}
         </Text>
       </Container>

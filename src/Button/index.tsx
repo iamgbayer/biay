@@ -1,17 +1,17 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { theme, ifProp, switchProp } from 'styled-tools'
 import { space } from 'styled-system'
-
-import { Theme } from '../Theme'
+import { ifNotProp, ifProp, switchProp, theme } from 'styled-tools'
+import { Icon } from '../Icon'
 
 type Props = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   children: React.ReactNode
-  size: 'medium' | 'small'
-  appearance: 'primary' | 'stroke' | 'secondary'
-  isFull: boolean
-  isDisabled: boolean
+  size?: 'medium' | 'small'
+  appearance?: 'primary' | 'stroke' | 'secondary'
+  isFull?: boolean
+  isDisabled?: boolean
+  isLoading?: boolean
 }
 
 export const Container = styled.button<
@@ -26,18 +26,17 @@ export const Container = styled.button<
   font-family: ${theme('fonts.100')};
   font-weight: ${theme('fontWeights.500')};
   color: ${switchProp('appearance', {
-    primary: ifProp(
-      { theme: Theme.light },
-      theme('colors.accent.700'),
-      theme('colors.accent.300')
-    ),
-    secondary: theme('colors.accent.200'),
+    primary: theme('colors.accent.200'),
+    secondary: switchProp('theme.is', {
+      dark: theme('colors.accent.200'),
+      light: theme('colors.accent.400')
+    }),
     stroke: theme('colors.primary.100')
   })};
 
   cursor: pointer;
   outline: 0;
-  width: ${ifProp({ full: true }, '100%', 'max-content')};
+  width: ${ifProp({ isFull: true }, '100%', 'max-content')};
   height: ${switchProp('size', {
     small: '30px',
     medium: '40px'
@@ -46,7 +45,10 @@ export const Container = styled.button<
   background-color: ${switchProp('appearance', {
     primary: theme('colors.primary.100'),
     stroke: 'transparent',
-    secondary: theme('colors.accent.700')
+    secondary: switchProp('theme.is', {
+      dark: theme('colors.accent.600'),
+      light: theme('colors.accent.150')
+    })
   })};
 
   ${ifProp(
@@ -54,11 +56,10 @@ export const Container = styled.button<
     css`
       cursor: not-allowed;
       background-color: ${theme('colors.primary.200')};
-      color: ${ifProp(
-        { theme: Theme.light },
-        theme('colors.accent.700'),
-        theme('colors.accent.300')
-      )};
+      color: ${switchProp('theme.is', {
+        dark: theme('colors.accent.600'),
+        light: theme('colors.accent.150')
+      })};
     `
   )};
 
@@ -71,7 +72,10 @@ export const Container = styled.button<
     ${switchProp('appearance', {
       stroke: theme('colors.primary.100'),
       primary: 'transparent',
-      secondary: theme('colors.accent.500')
+      secondary: switchProp('theme.is', {
+        dark: theme('colors.accent.500'),
+        light: theme('colors.accent.250')
+      })
     })};
 
   display: flex;
@@ -85,26 +89,29 @@ export const Container = styled.button<
       stroke: theme('colors.primary.100')
     })};
 
-    ${ifProp(
-      { appearance: 'stroke' },
+    ${ifNotProp(
+      { appearance: 'secondary' },
       css`
-        color: ${ifProp(
-          { theme: Theme.light },
-          theme('colors.accent.700'),
-          theme('colors.accent.300')
-        )};
+        color: ${theme('colors.accent.200')};
       `
     )}
   }
 `
 
-export const Button = ({ children, ...props }: Props) => (
-  <Container {...props}>{children}</Container>
+export const Button = ({ children, isLoading, ...props }: Props) => (
+  <Container {...props}>
+    {isLoading ? (
+      <Icon name='loading' color='accent.200' width={32} height={32} />
+    ) : (
+      children
+    )}
+  </Container>
 )
 
 Button.defaultProps = {
   size: 'medium',
   appearance: 'primary',
   isFull: false,
+  isLoading: false,
   isDisabled: false
 }

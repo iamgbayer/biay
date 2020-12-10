@@ -1,7 +1,7 @@
 import React from 'react'
 import Selectable from 'react-select'
 import styled from 'styled-components'
-import { ifProp, theme } from 'styled-tools'
+import { ifProp, switchProp, theme } from 'styled-tools'
 import { Box } from '../Box'
 
 type Value = {
@@ -11,17 +11,17 @@ type Value = {
 
 type Props = {
   placeholder: string
-  isSearchable: boolean
-  isMulti: boolean
-  options: []
-  hasBackground: boolean
-  defaultOptions: Array<Value>
-  defaultValue: Value
-  isFull: boolean
+  isSearchable?: boolean
+  isMulti?: boolean
+  options: Array<Value>
+  hasBackground?: boolean
+  defaultOptions?: Array<Value>
+  defaultValue?: Value
+  isFull?: boolean
   onChange: () => void
   id: string | undefined
-  isLoading: boolean
-  isDisabled: boolean
+  isLoading?: boolean
+  isDisabled?: boolean
   value: Value
 }
 
@@ -34,12 +34,18 @@ const Container = styled(Box)<{ isFull: boolean; hasBackground: boolean }>`
 
   .select__control {
     height: 38px;
-    border-color: ${theme('colors.accent.500')};
+    border-color: ${switchProp('theme.is', {
+      dark: theme('colors.accent.500'),
+      light: theme('colors.accent.250')
+    })};
     box-shadow: none;
     background-color: ${ifProp(
       { hasBackground: true },
-      theme('colors.accent.700'),
-      theme('colors.accent.800')
+      switchProp('theme.is', {
+        dark: theme('colors.accent.600'),
+        light: theme('colors.accent.150')
+      }),
+      'transparent'
     )};
   }
 
@@ -59,7 +65,10 @@ const Container = styled(Box)<{ isFull: boolean; hasBackground: boolean }>`
   .select__single-value,
   .select__menu-notice,
   .select * {
-    color: ${theme('colors.accent.200')};
+    color: ${switchProp('theme.is', {
+      dark: theme('colors.accent.350'),
+      light: theme('colors.accent.400')
+    })};
   }
 
   .select__indicator-separator {
@@ -67,36 +76,52 @@ const Container = styled(Box)<{ isFull: boolean; hasBackground: boolean }>`
   }
 
   .select__menu {
-    background-color: ${theme('colors.accent.700')};
+    box-shadow: none;
+    border: 1px solid
+      ${switchProp('theme.is', {
+        dark: theme('colors.accent.500'),
+        light: theme('colors.accent.250')
+      })};
+    background-color: ${switchProp('theme.is', {
+      dark: theme('colors.accent.600'),
+      light: theme('colors.accent.150')
+    })};
   }
 
   .select__option:hover,
   .select__multi-value {
+    color: ${theme('colors.accent.200')};
     background-color: ${theme('colors.primary.100')};
   }
 
   .select__option {
-    background: ${theme('colors.accent.700')};
+    background-color: ${switchProp('theme.is', {
+      dark: theme('colors.accent.600'),
+      light: theme('colors.accent.150')
+    })};
   }
 
   .select__control:hover {
-    border-color: ${theme('colors.accent.500')};
+    border-color: ${switchProp('theme.is', {
+      dark: theme('colors.accent.500'),
+      light: theme('colors.accent.250')
+    })};
   }
 `
 
 export const Select = ({
   placeholder,
-  isSearchable,
-  isMulti,
+  isSearchable = false,
+  isMulti = false,
   options,
-  hasBackground,
+  hasBackground = true,
   defaultOptions,
   defaultValue,
-  isFull,
+  isFull = false,
   onChange,
   id,
-  isLoading,
-  isDisabled,
+  isLoading = false,
+  isDisabled = false,
   value,
   ...props
 }: Props) => {

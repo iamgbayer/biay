@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactTable from 'react-table'
 import styled from 'styled-components'
-import { theme } from 'styled-tools'
+import { switchProp, theme } from 'styled-tools'
 import { Box } from '../Box'
 import Pagination from './Pagination'
 
@@ -12,9 +12,16 @@ const Container = styled(Box)`
 
   .ReactTable {
     .rt-table {
-      border: 1px solid ${theme('colors.accent.500')};
-      background-color: ${theme('colors.accent.700')};
-      border-radius: ${theme('radii.11')};
+      border: 1px solid
+        ${switchProp('theme.is', {
+          dark: theme('colors.accent.500'),
+          light: theme('colors.accent.250')
+        })};
+      background-color: ${switchProp('theme.is', {
+        dark: theme('colors.accent.600'),
+        light: theme('colors.accent.200')
+      })};
+      border-radius: ${theme('radii.8')};
     }
 
     .rt-tr {
@@ -32,12 +39,17 @@ const Container = styled(Box)`
 
       .rt-th {
         outline: none;
-        font-family: ${theme('fonts.200')};
-        color: ${theme('colors.accent.200')};
-        font-weight: ${theme('fontWeights.700')};
-        font-size: ${theme('fontSizes.20')};
+        font-family: ${theme('fonts.100')};
+        color: ${switchProp('theme.is', {
+          dark: theme('colors.accent.350'),
+          light: theme('colors.accent.400')
+        })};
+        font-weight: ${theme('fontWeights.500')};
+        font-size: ${theme('fontSizes.12')};
         text-align: center;
-        height: 60px;
+        text-transform: uppercase;
+        letter-spacing: ${theme('letterSpacings.1')};
+        padding: 12px 24px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -50,17 +62,33 @@ const Container = styled(Box)`
     }
 
     .rt-tbody {
+      background-color: ${switchProp('theme.is', {
+        dark: theme('colors.accent.700'),
+        light: theme('colors.accent.100')
+      })};
+      border-radius: ${theme('radii.8')};
+
       .rt-tr-group:nth-of-type(odd) {
-        border-top: 1px solid ${theme('colors.accent.500')};
-        border-bottom: 1px solid ${theme('colors.accent.500')};
-        background-color: ${theme('colors.accent.600')};
+        border-top: 1px solid
+          ${switchProp('theme.is', {
+            dark: theme('colors.accent.500'),
+            light: theme('colors.accent.250')
+          })};
+        border-bottom: 1px solid
+          ${switchProp('theme.is', {
+            dark: theme('colors.accent.500'),
+            light: theme('colors.accent.250')
+          })};
       }
 
       .rt-td {
-        font-size: ${theme('fontSizes.15')};
-        color: ${theme('colors.accent.200')};
+        font-size: ${theme('fontSizes.14')};
+        color: ${switchProp('theme.is', {
+          dark: theme('colors.accent.350'),
+          light: theme('colors.accent.400')
+        })};
         font-family: ${theme('fonts.100')};
-        height: 45px;
+        padding: 16px 24px;
         display: flex;
         justify-content: center;
         align-items: center;

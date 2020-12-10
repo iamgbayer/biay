@@ -5,6 +5,7 @@ import {
   fontSize,
   fontWeight,
   layout,
+  letterSpacing,
   lineHeight,
   space,
   textAlign
@@ -27,6 +28,7 @@ export const Text = styled.span<Partial<Props>>`
   ${fontWeight}
   ${color}
   ${lineHeight}
+  ${letterSpacing}
   ${textAlign}
   ${space}
   ${fontFamily}
@@ -50,10 +52,10 @@ export const Text = styled.span<Partial<Props>>`
     'color',
     switchProp('theme.is', {
       light: css`
-        color: ${theme('colors.accent.100')};
+        color: ${theme('colors.accent.350')};
       `,
       dark: css`
-        color: ${theme('colors.accent.100')};
+        color: ${theme('colors.accent.400')};
       `
     })
   )};

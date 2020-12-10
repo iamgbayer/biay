@@ -46,7 +46,7 @@ const Container = styled.div`
 export const Icon = memo(
   ({
     name,
-    color = 'accent.100',
+    color = 'accent.200',
     width = 20,
     height = 20,
     ...props

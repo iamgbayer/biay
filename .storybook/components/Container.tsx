@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { theme } from 'styled-tools'
+import { switchProp, theme } from 'styled-tools'
 
 export const Container = styled.div`
   width: 100%;
@@ -8,5 +8,8 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 20px;
-  background-color: ${theme('colors.accent.800')};
+  background-color: ${switchProp('theme.is', {
+    dark: theme('colors.accent.700'),
+    light: theme('colors.accent.100')
+  })};
 `

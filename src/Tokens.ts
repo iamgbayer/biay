@@ -17,14 +17,17 @@ export const Tokens = {
   },
   radii: {
     5: '5px',
-    11: '11px',
+    8: '8px',
     15: '15px',
     25: '25px',
     50: '50%'
   },
+  letterSpacings: {
+    1: '1px'
+  },
   fonts: {
     100: 'Inter, sans-serif',
-    200: 'PT serif, serif'
+    200: 'Merriweather, serif'
   },
   fontWeights: {
     400: 400,
@@ -33,7 +36,8 @@ export const Tokens = {
   },
   fontSizes: {
     12: '12px',
-    15: '15px',
+    14: '14px',
+    18: '18px',
     20: '20px',
     24: '24px',
     36: '36px',

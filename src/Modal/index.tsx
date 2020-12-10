@@ -1,9 +1,9 @@
-import { rgba } from 'polished'
 import or from 'ramda/src/or'
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { theme } from 'styled-tools'
+import { switchProp, theme } from 'styled-tools'
 import { Closeable } from '../Closeable'
+import { getByTheme } from '../helpers'
 import { Icon } from '../Icon'
 
 type Props = {
@@ -16,7 +16,6 @@ const Overlay = styled.div`
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  background-color: ${({ theme }) => rgba(theme.colors.accent[700], 0.8)};
   position: fixed;
   left: 0;
   top: 0;
@@ -27,9 +26,16 @@ const Overlay = styled.div`
 const Content = styled.div`
   width: 100%;
   max-width: 550px;
-  background-color: ${theme('colors.accent.800')};
+  background-color: ${switchProp('theme.is', {
+    dark: theme('colors.accent.600'),
+    light: theme('colors.accent.150')
+  })};
   border-radius: ${theme('radii.15')};
-  border: 1px solid ${theme('colors.accent.500')};
+  border: 1px solid
+    ${switchProp('theme.is', {
+      dark: theme('colors.accent.500'),
+      light: theme('colors.accent.250')
+    })};
   padding: 45px;
   position: absolute;
   left: 50%;
@@ -51,7 +57,16 @@ export const Modal = ({ children, isOpen, close }: Props) => {
           <Closeable whenClose={or(close, () => {})}>
             <Content>
               {close && (
-                <Close name='close' width={35} height={35} onClick={close} />
+                <Close
+                  name='close'
+                  color={getByTheme({
+                    dark: 'accent.200',
+                    light: 'accent.400'
+                  })}
+                  width={35}
+                  height={35}
+                  onClick={close}
+                />
               )}
 
               {children}
