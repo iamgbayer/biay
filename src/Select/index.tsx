@@ -54,6 +54,7 @@ const Container = styled(Box)<{ isFull: boolean; hasBackground: boolean }>`
   .select__multi-value,
   .select__single-value,
   .select__menu-notice {
+    font-size: ${theme('fontSizes.14')};
     font-family: ${theme('fonts.100')};
   }
 
