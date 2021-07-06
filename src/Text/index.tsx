@@ -5,21 +5,29 @@ import {
   fontSize,
   fontWeight,
   layout,
+  LayoutProps,
   letterSpacing,
   lineHeight,
   space,
-  textAlign
+  SpaceProps,
+  textAlign,
+  FontFamilyProps,
+  FontSizeProps,
+  FontWeightProps,
+  TextAlignProps
 } from 'styled-system'
 import { ifNotProp, ifProp, switchProp, theme } from 'styled-tools'
 
-type Props = {
-  marginLeft: number
-  marginRight: number
-  marginBottom: number
-  marginTop: number
-  fontFamily: string | number
-  fontSize: string | number
-  fontWeight: string | number
+interface Props
+  extends LayoutProps,
+    SpaceProps,
+    FontWeightProps,
+    FontFamilyProps,
+    FontSizeProps,
+    SpaceProps,
+    LayoutProps,
+    TextAlignProps {
+  children: React.ReactNode | string | number | (string | number)[]
 }
 
 export const Text = styled.span<Partial<Props>>`
